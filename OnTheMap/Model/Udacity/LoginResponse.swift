@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum LoginErrorType: String {
+    case WrongCredentials = "Username or password is incorrect"
+    case NetworkError = "Could not reach servers"
+    case Unknown = "An unknown error has occurred"
+}
+
 struct LoginResponse: Codable {
     let account: Account?
     let session: Session?

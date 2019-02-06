@@ -21,16 +21,21 @@ class ViewController: UIViewController {
         passwordTextField.text = "blubb"
     }
     
-    func handleLoginResponse(success: Bool, error: String?) {
+    func handleLoginResponse(success: Bool, error: LoginErrorType?) {
         
-        if let error = error {
-            let alertVC = UIAlertController(title: "Login Failed", message: error, preferredStyle: .alert)
+        if success {
+            print("SUCCESS!!")
+        } else {
+            var errorMessage = LoginErrorType.Unknown.rawValue
+            
+            if let error = error {
+                errorMessage = error.rawValue
+            }
+            
+            let alertVC = UIAlertController(title: "Login Failed", message: errorMessage, preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             show(alertVC, sender: nil)
-        } else {
-            
         }
-        
     }
     
     @IBAction func didTapLoginButton(_ sender: Any) {

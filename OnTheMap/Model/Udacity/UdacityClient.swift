@@ -35,7 +35,7 @@ class UdacityClient {
         }
     }
     
-    class func login(username: String, password: String, completion: @escaping (Bool, String?) -> Void) {
+    class func login(username: String, password: String, completion: @escaping (Bool, LoginErrorType?) -> Void) {
         
         let body = LoginRequest(username: username, password: password)
         
@@ -47,20 +47,24 @@ class UdacityClient {
         
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             guard let data = data else {
-                completion(false, "Network error")
+                DispatchQueue.main.async {
+                  completion(false, LoginErrorType.NetworkError)
+                }
                 return
             }
             
-            let decoder = JSONDecoder()
+            // skipping the 5 first characters in the data, for some security by obscurity reason
             let newData = data.subdata(in: 5..<data.count)
+            
+            let decoder = JSONDecoder()
             
             do {
                 let responseObject = try decoder.decode(LoginResponse.self, from: newData)
+                print(responseObject)
                 
-                if let error = responseObject.error {
-                    
+                if responseObject.error != nil {
                     DispatchQueue.main.async {
-                        completion(false, error)
+                        completion(false, LoginErrorType.WrongCredentials)
                     }
                 }
                 
@@ -70,7 +74,7 @@ class UdacityClient {
                 
             } catch {
                 DispatchQueue.main.async {
-                  completion(false, "Unknown error")
+                  completion(false, LoginErrorType.Unknown)
                 }
             }
         }
