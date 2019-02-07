@@ -20,4 +20,3 @@ struct Udacity: Codable {
     let username: String
     let password: String
 }
-

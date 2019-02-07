@@ -15,7 +15,17 @@ class MapViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        print("MAP VIEW CONTROLLER")
+        ParseClient.loadStudentLocations(completion: handleStudentLocationsResult(success:error:))
+    }
+    
+    func handleStudentLocationsResult(success: Bool, error: Error?) {
+        if success {
+            print(StudentInformationModel.studentInformationList)
+        } else {
+            let alertVC = UIAlertController(title: "Login Failed", message: (error as! String), preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            show(alertVC, sender: nil)
+        }
     }
     
 }

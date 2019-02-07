@@ -6,6 +6,10 @@
 //  Copyright © 2019 Frank Mortensen. All rights reserved.
 //
 
+
+// TODO: ADD METHOD FOR GETTING RANDOM USER INFO
+
+
 import Foundation
 
 class UdacityClient {

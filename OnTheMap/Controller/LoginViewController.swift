@@ -15,8 +15,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
+        // TODO: Remember to remove these before submitting too late.
         usernameTextField.text = "fmortens@me.com"
         passwordTextField.text = "blubb"
     }
