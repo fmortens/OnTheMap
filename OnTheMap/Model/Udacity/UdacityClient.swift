@@ -11,22 +11,25 @@ import Foundation
 class UdacityClient {
     
     struct Auth {
-        static var registered = false
-        static var accountKey = ""
-        static var sessionId = ""
-        static var sessionExpiration = ""
+        static var account: Account? = nil
+        static var session: Session? = nil
     }
     
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com"
-        
+
         case login
+        case signup
+        case logout
         
         var stringValue: String {
+            
             switch self {
-                
-            case .login:
-                return Endpoints.base + "/v1/session"
+                case .login, .logout:
+                    return Endpoints.base + "/v1/session"
+            
+                case .signup:
+                    return "https://auth.udacity.com/sign-up"
             }
         }
         
@@ -60,7 +63,6 @@ class UdacityClient {
             
             do {
                 let responseObject = try decoder.decode(LoginResponse.self, from: newData)
-                print(responseObject)
                 
                 if responseObject.error != nil {
                     DispatchQueue.main.async {
@@ -68,14 +70,63 @@ class UdacityClient {
                     }
                 }
                 
+                if let session = responseObject.session, let account = responseObject.account {
+                    Auth.session = session
+                    Auth.account = account
+                } else {
+                    // I mean, if we can't get session or account something must be wrong
+                    DispatchQueue.main.async {
+                        completion(false, LoginErrorType.Unknown)
+                    }
+                }
+                
                 DispatchQueue.main.async {
-                  completion(true, nil)
+                    completion(true, nil)
                 }
                 
             } catch {
+                print(error)
                 DispatchQueue.main.async {
                   completion(false, LoginErrorType.Unknown)
                 }
+            }
+        }
+        
+        task.resume()
+        
+    }
+    
+    class func logout(completion: @escaping (Bool) -> Void) {
+    
+        var request = URLRequest(url: Endpoints.logout.url)
+
+        request.httpMethod = "DELETE"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+  
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if error != nil {
+                DispatchQueue.main.async {
+                    completion(false)
+                }
+            }
+            
+            // Clear login information
+            UdacityClient.Auth.account = nil
+            UdacityClient.Auth.session = nil
+            
+            DispatchQueue.main.async {
+                completion(true)
             }
         }
         

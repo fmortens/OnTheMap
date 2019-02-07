@@ -17,7 +17,7 @@ enum LoginErrorType: String {
 struct LoginResponse: Codable {
     let account: Account?
     let session: Session?
-    let status: Int
+    let status: Int?
     let error: String?
 }
 

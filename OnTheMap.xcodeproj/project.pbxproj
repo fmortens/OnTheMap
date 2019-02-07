@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE60B897220CA6F30081C21B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B896220CA6F30081C21B /* MapViewController.swift */; };
+		DE60B899220CA7370081C21B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B898220CA7370081C21B /* TableViewController.swift */; };
+		DE60B89B220CA8630081C21B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B89A220CA8630081C21B /* UIViewControllerExtension.swift */; };
 		DEC67E58220B478300FE1F28 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC67E57220B478300FE1F28 /* AppDelegate.swift */; };
-		DEC67E5A220B478300FE1F28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC67E59220B478300FE1F28 /* ViewController.swift */; };
+		DEC67E5A220B478300FE1F28 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC67E59220B478300FE1F28 /* LoginViewController.swift */; };
 		DEC67E5D220B478300FE1F28 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC67E5B220B478300FE1F28 /* Main.storyboard */; };
 		DEC67E5F220B478400FE1F28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEC67E5E220B478400FE1F28 /* Assets.xcassets */; };
 		DEC67E62220B478400FE1F28 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEC67E60220B478400FE1F28 /* LaunchScreen.storyboard */; };
@@ -18,9 +21,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE60B896220CA6F30081C21B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		DE60B898220CA7370081C21B /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		DE60B89A220CA8630081C21B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		DEC67E54220B478300FE1F28 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC67E57220B478300FE1F28 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DEC67E59220B478300FE1F28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DEC67E59220B478300FE1F28 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DEC67E5C220B478300FE1F28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DEC67E5E220B478400FE1F28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEC67E61220B478400FE1F28 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -72,7 +78,10 @@
 		DEC67E69220B47C700FE1F28 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				DEC67E59220B478300FE1F28 /* ViewController.swift */,
+				DEC67E59220B478300FE1F28 /* LoginViewController.swift */,
+				DE60B896220CA6F30081C21B /* MapViewController.swift */,
+				DE60B898220CA7370081C21B /* TableViewController.swift */,
+				DE60B89A220CA8630081C21B /* UIViewControllerExtension.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -176,8 +185,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEC67E5A220B478300FE1F28 /* ViewController.swift in Sources */,
+				DEC67E5A220B478300FE1F28 /* LoginViewController.swift in Sources */,
+				DE60B899220CA7370081C21B /* TableViewController.swift in Sources */,
+				DE60B897220CA6F30081C21B /* MapViewController.swift in Sources */,
 				DEC67E58220B478300FE1F28 /* AppDelegate.swift in Sources */,
+				DE60B89B220CA8630081C21B /* UIViewControllerExtension.swift in Sources */,
 				DEC67E6E220B483000FE1F28 /* UdacityClient.swift in Sources */,
 				DEC67E71220B4A6200FE1F28 /* LoginRequest.swift in Sources */,
 				DEC67E73220B4B6300FE1F28 /* LoginResponse.swift in Sources */,
