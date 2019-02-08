@@ -14,6 +14,10 @@ enum LoginErrorType: String {
     case Unknown = "An unknown error has occurred"
 }
 
+enum NetworkErrorType: String {
+    case GenericError = "An unknown error has occurred"
+}
+
 struct LoginResponse: Codable {
     let account: Account?
     let session: Session?

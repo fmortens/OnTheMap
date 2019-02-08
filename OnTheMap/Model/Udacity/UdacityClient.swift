@@ -25,6 +25,7 @@ class UdacityClient {
         case login
         case signup
         case logout
+        case getPublicUserData(String)
         
         var stringValue: String {
             
@@ -34,6 +35,9 @@ class UdacityClient {
             
                 case .signup:
                     return "https://auth.udacity.com/sign-up"
+                
+            case .getPublicUserData(let userId):
+                    return Endpoints.base + "/v1/users/\(userId)"
             }
         }
         
@@ -129,6 +133,10 @@ class UdacityClient {
             UdacityClient.Auth.account = nil
             UdacityClient.Auth.session = nil
             
+            // And data model
+            DataModel.publicUserData = nil
+            DataModel.studentInformationList = []
+            
             DispatchQueue.main.async {
                 completion(true)
             }
@@ -136,6 +144,44 @@ class UdacityClient {
         
         task.resume()
         
+    }
+    
+    class func getPublicUserData(userId: String, completion: @escaping (Bool, NetworkErrorType?) -> Void) {
+        
+        let request = URLRequest(url: Endpoints.getPublicUserData(userId).url)
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    print("Missing data!")
+                    completion(false, NetworkErrorType.GenericError)
+                }
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            do {
+                
+                let newData = data.subdata(in: 5..<data.count)
+                let responseObject = try decoder.decode(PublicUserDataResponse.self, from: newData)
+                
+                DataModel.publicUserData = responseObject as PublicUserDataResponse
+                
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+            } catch {
+                print(error)
+                
+                DispatchQueue.main.async {
+                    completion(false, NetworkErrorType.GenericError)
+                }
+            }
+        }
+        
+        task.resume()
     }
     
 }

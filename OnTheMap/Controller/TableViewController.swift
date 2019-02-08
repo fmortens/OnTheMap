@@ -15,7 +15,9 @@ class TableViewController: UITableViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        print("TABLE VIEW CONTROLLER")
+        print("TABLE VIEW CONTROLLER IS ALIVE")
+        
+        
     }
     
 }

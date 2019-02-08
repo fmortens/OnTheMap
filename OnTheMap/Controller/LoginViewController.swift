@@ -24,8 +24,11 @@ class LoginViewController: UIViewController {
     func handleLoginResponse(success: Bool, error: LoginErrorType?) {
         
         if success {
-            // We have login and all is well
-            self.performSegue(withIdentifier: "successfulLogin", sender: nil)
+            
+            if let accountKey = UdacityClient.Auth.account?.key {
+                UdacityClient.getPublicUserData(userId: accountKey, completion: handleGetPublicUserData(success:error:))
+            }
+        
         } else {
             var errorMessage = LoginErrorType.Unknown.rawValue
             
@@ -34,6 +37,35 @@ class LoginViewController: UIViewController {
             }
             
             let alertVC = UIAlertController(title: "Login Failed", message: errorMessage, preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            show(alertVC, sender: nil)
+        }
+    }
+
+    func handleGetPublicUserData(success: Bool, error: NetworkErrorType?) {
+        if success {
+            
+            ParseClient.loadStudentLocations(completion: handleStudentLocationsResult(success:error:))
+            
+            
+        } else {
+            var errorMessage = "Ok, something weird is goind on."
+            
+            if let error = error {
+                errorMessage = error.rawValue
+            }
+            
+            let alertVC = UIAlertController(title: "Data fetch failed", message: errorMessage, preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            show(alertVC, sender: nil)
+        }
+    }
+    
+    func handleStudentLocationsResult(success: Bool, error: Error?) {
+        if success {
+            self.performSegue(withIdentifier: "successfulLogin", sender: nil)
+        } else {
+            let alertVC = UIAlertController(title: "Login Failed", message: (error as! String), preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             show(alertVC, sender: nil)
         }

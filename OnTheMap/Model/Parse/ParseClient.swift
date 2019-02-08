@@ -54,7 +54,7 @@ class ParseClient {
             do {
                 let responseObject = try decoder.decode(StudentLocationsResult.self, from: data)
 
-                StudentInformationModel.studentInformationList = responseObject.results
+                DataModel.studentInformationList = responseObject.results
                 
                 DispatchQueue.main.async {
                     completion(true, nil)
