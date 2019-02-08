@@ -50,24 +50,17 @@ class TableViewController: UIViewController {
     
     @objc
     func requestData() {
+        print("TableView REQUEST DATA")
         ParseClient.loadStudentLocations(completion: handleStudentLocationsResult)
     }
-    
+
     func handleStudentLocationsResult(success: Bool, error: Error?) {
         let deadline = DispatchTime.now() + .milliseconds(500)
         DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
             self.refreshControl.endRefreshing()
         })
-        
+
         self.tableView.reloadData()
-    }
-    
-    @IBAction func didTapRefreshButton(_ sender: Any) {
-        requestData()
-    }
-    
-    @IBAction func didTapAddButton(_ sender: Any) {
-        print("ADD PIN - TODO!")
     }
 }
 
@@ -105,10 +98,12 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        selectedIndex = indexPath.row
-//        performSegue(withIdentifier: "showDetail", sender: nil)
+
         
         print("row \(indexPath.row) was tapped")
+        if let mediaURL = DataModel.studentInformationList[indexPath.row].mediaURL, let url = URL(string: mediaURL) {
+            UIApplication.shared.open(url)
+        }
         
         tableView.deselectRow(at: indexPath, animated: true)
     }

@@ -39,5 +39,14 @@ extension UIViewController {
         
     }
     
+    @IBAction func didTapRefreshButton(_ sender: Any) {
+        print("didTapRefreshButton")
+        
+    }
+    
+    @IBAction func didTapAddButton(_ sender: Any) {
+        print("ADD PIN - TODO!")
+    }
+    
 }
 

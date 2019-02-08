@@ -9,7 +9,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -50,6 +50,24 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         self.mapView.addAnnotations(annotations)
     }
     
+    @objc
+    func requestData() {
+        print("MapView REQUEST DATA")
+        ParseClient.loadStudentLocations(completion: handleStudentLocationsResult)
+    }
+    
+    func handleStudentLocationsResult(success: Bool, error: Error?) {
+        //        let deadline = DispatchTime.now() + .milliseconds(500)
+        //        DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
+        //            self.refreshControl.endRefreshing()
+        //        })
+        //
+        //        self.tableView.reloadData()
+    }
+    
+}
+
+extension MapViewController: MKMapViewDelegate {
     // Here we create a view with a "right callout accessory view". You might choose to look into other
     // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
     // method in TableViewDataSource.
@@ -77,10 +95,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            if let toOpen = view.annotation?.subtitle! {
-                UIApplication.shared.open(URL(string: toOpen)!)
+            if let toOpen = view.annotation?.subtitle!, let url = URL(string: toOpen) {
+                UIApplication.shared.open(url)
             }
         }
     }
-    
 }

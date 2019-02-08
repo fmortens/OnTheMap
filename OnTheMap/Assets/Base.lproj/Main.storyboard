@@ -141,6 +141,18 @@
                                 <action selector="logoutTapped:" destination="4jK-zP-rwz" id="bsi-Il-eZn"/>
                             </connections>
                         </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Add" image="icon_addpin" id="cBk-uE-bHj" userLabel="Add">
+                                <connections>
+                                    <action selector="didTapAddButton:" destination="4jK-zP-rwz" id="dbw-0F-p14"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Refresh" image="icon_refresh" id="u7T-Rn-4sh" userLabel="Refresh">
+                                <connections>
+                                    <action selector="didTapRefreshButton:" destination="4jK-zP-rwz" id="u5L-6Q-Kmn"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="w2X-Cb-ra7" id="xbS-Pp-iUY"/>
@@ -182,12 +194,12 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Add" image="icon_addpin" id="0wr-8v-VCB" userLabel="Add">
                                 <connections>
-                                    <action selector="didTapAddButton:" destination="cpJ-Re-Zei" id="IOe-lp-UKf"/>
+                                    <action selector="didTapAddButton:" destination="cpJ-Re-Zei" id="O38-p7-FnN"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Refresh" image="icon_refresh" id="z2a-BZ-oEg" userLabel="Refresh">
                                 <connections>
-                                    <action selector="didTapRefreshButton:" destination="cpJ-Re-Zei" id="459-cX-HBe"/>
+                                    <action selector="didTapRefreshButton:" destination="cpJ-Re-Zei" id="xMJ-d2-EgK"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
