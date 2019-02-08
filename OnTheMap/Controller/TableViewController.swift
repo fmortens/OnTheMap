@@ -62,6 +62,13 @@ class TableViewController: UIViewController {
         self.tableView.reloadData()
     }
     
+    @IBAction func didTapRefreshButton(_ sender: Any) {
+        requestData()
+    }
+    
+    @IBAction func didTapAddButton(_ sender: Any) {
+        print("ADD PIN - TODO!")
+    }
 }
 
 extension TableViewController: UITableViewDataSource, UITableViewDelegate {
@@ -80,7 +87,7 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
         let studentInformation = DataModel.studentInformationList[indexPath.row]
         
         cell.textLabel?.text = "\(studentInformation.firstName ?? "") \(studentInformation.lastName ?? "")"
-        //cell.imageView?.image = UIImage(named: "PosterPlaceholder")
+        cell.imageView?.image = UIImage(named: "icon_pin")
         
 //        if let posterPath = movie.posterPath {
 //            TMDBClient.downloadPosterImage(posterPath: posterPath) { (data, error) in

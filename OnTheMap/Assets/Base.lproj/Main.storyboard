@@ -179,6 +179,18 @@
                                 <action selector="logoutTapped:" destination="cpJ-Re-Zei" id="Vtq-Kl-q3v"/>
                             </connections>
                         </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Add" image="icon_addpin" id="0wr-8v-VCB" userLabel="Add">
+                                <connections>
+                                    <action selector="didTapAddButton:" destination="cpJ-Re-Zei" id="IOe-lp-UKf"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Refresh" image="icon_refresh" id="z2a-BZ-oEg" userLabel="Refresh">
+                                <connections>
+                                    <action selector="didTapRefreshButton:" destination="cpJ-Re-Zei" id="459-cX-HBe"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ZG5-b6-eRc" id="fuT-MZ-3C3"/>
@@ -242,9 +254,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_addpin" width="24" height="24"/>
         <image name="icon_listview-selected" width="75" height="50"/>
         <image name="icon_mapview-deselected" width="75" height="50"/>
         <image name="icon_mapview-selected" width="75" height="50"/>
+        <image name="icon_refresh" width="24" height="24"/>
         <image name="icon_world" width="52" height="67"/>
     </resources>
 </document>
