@@ -9,7 +9,9 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: CustomViewController {
+    
+    var annotations = [MKPointAnnotation]()
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -18,7 +20,14 @@ class MapViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
         
-        var annotations = [MKPointAnnotation]()
+        updatePins()
+    }
+    
+    func updatePins() {
+        print("updatePins")
+        
+        self.mapView.removeAnnotations(annotations)
+        annotations = [MKPointAnnotation]()
         
         for studentInformation in DataModel.studentInformationList {
             
@@ -27,20 +36,20 @@ class MapViewController: UIViewController {
                 // This is a version of the Double type.
                 let lat = CLLocationDegrees(latitude)
                 let long = CLLocationDegrees(longitude)
-            
+                
                 // The lat and long are used to create a CLLocationCoordinates2D instance.
                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
+                
                 let first = studentInformation.firstName
                 let last = studentInformation.lastName
                 let mediaURL = studentInformation.mediaURL
-            
+                
                 // Here we create the annotation and set its coordiate, title, and subtitle properties
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = coordinate
                 annotation.title = "\(first ?? "") \(last ?? "")"
                 annotation.subtitle = mediaURL
-            
+                
                 // Finally we place the annotation in an array of annotations.
                 annotations.append(annotation)
             }
@@ -51,18 +60,16 @@ class MapViewController: UIViewController {
     }
     
     @objc
-    func requestData() {
+    override func requestData() {
         print("MapView REQUEST DATA")
         ParseClient.loadStudentLocations(completion: handleStudentLocationsResult)
     }
     
-    func handleStudentLocationsResult(success: Bool, error: Error?) {
-        //        let deadline = DispatchTime.now() + .milliseconds(500)
-        //        DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
-        //            self.refreshControl.endRefreshing()
-        //        })
-        //
-        //        self.tableView.reloadData()
+    override func handleStudentLocationsResult(success: Bool, error: Error?) {
+        print("MapView handleStudentLocationsResult")
+        
+        
+        updatePins()
     }
     
 }

@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE464F71220F5DFE0093641C /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE464F70220F5DFE0093641C /* InformationPostingViewController.swift */; };
+		DE580DF2220F09770013DB31 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE580DF1220F09770013DB31 /* CustomViewController.swift */; };
 		DE60B897220CA6F30081C21B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B896220CA6F30081C21B /* MapViewController.swift */; };
 		DE60B899220CA7370081C21B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B898220CA7370081C21B /* TableViewController.swift */; };
-		DE60B89B220CA8630081C21B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B89A220CA8630081C21B /* UIViewControllerExtension.swift */; };
+		DE60B89B220CA8630081C21B /* CustomViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B89A220CA8630081C21B /* CustomViewControllerExtension.swift */; };
 		DE60B89E220CB5900081C21B /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B89D220CB5900081C21B /* ParseClient.swift */; };
 		DE60B8A2220CB8FD0081C21B /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B8A1220CB8FD0081C21B /* DataModel.swift */; };
 		DE60B8A5220CBA120081C21B /* StudentLocationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B8A4220CBA120081C21B /* StudentLocationsResponse.swift */; };
@@ -25,9 +27,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE464F70220F5DFE0093641C /* InformationPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
+		DE580DF1220F09770013DB31 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		DE60B896220CA6F30081C21B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		DE60B898220CA7370081C21B /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		DE60B89A220CA8630081C21B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		DE60B89A220CA8630081C21B /* CustomViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewControllerExtension.swift; sourceTree = "<group>"; };
 		DE60B89D220CB5900081C21B /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		DE60B8A1220CB8FD0081C21B /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		DE60B8A4220CBA120081C21B /* StudentLocationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocationsResponse.swift; sourceTree = "<group>"; };
@@ -106,7 +110,9 @@
 				DEC67E59220B478300FE1F28 /* LoginViewController.swift */,
 				DE60B896220CA6F30081C21B /* MapViewController.swift */,
 				DE60B898220CA7370081C21B /* TableViewController.swift */,
-				DE60B89A220CA8630081C21B /* UIViewControllerExtension.swift */,
+				DE60B89A220CA8630081C21B /* CustomViewControllerExtension.swift */,
+				DE580DF1220F09770013DB31 /* CustomViewController.swift */,
+				DE464F70220F5DFE0093641C /* InformationPostingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -216,10 +222,12 @@
 				DE60B89E220CB5900081C21B /* ParseClient.swift in Sources */,
 				DEC67E5A220B478300FE1F28 /* LoginViewController.swift in Sources */,
 				DE60B899220CA7370081C21B /* TableViewController.swift in Sources */,
+				DE464F71220F5DFE0093641C /* InformationPostingViewController.swift in Sources */,
 				DE60B897220CA6F30081C21B /* MapViewController.swift in Sources */,
 				DEC67E58220B478300FE1F28 /* AppDelegate.swift in Sources */,
 				DE60B8A2220CB8FD0081C21B /* DataModel.swift in Sources */,
-				DE60B89B220CA8630081C21B /* UIViewControllerExtension.swift in Sources */,
+				DE580DF2220F09770013DB31 /* CustomViewController.swift in Sources */,
+				DE60B89B220CA8630081C21B /* CustomViewControllerExtension.swift in Sources */,
 				DEC67E6E220B483000FE1F28 /* UdacityClient.swift in Sources */,
 				DEC67E71220B4A6200FE1F28 /* LoginRequest.swift in Sources */,
 				DE60B8A5220CBA120081C21B /* StudentLocationsResponse.swift in Sources */,

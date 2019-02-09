@@ -18,13 +18,13 @@ class ParseClient {
     enum Endpoints {
         static let base = "https://parse.udacity.com/parse/classes/StudentLocation"
         
-        case test
+        case getStudentLocations
         
         var stringValue: String {
             
             switch self {
-                case .test:
-                    return Endpoints.base
+                case .getStudentLocations:
+                    return Endpoints.base + "?limit=100&order=updatedAt"
             }
         }
         
@@ -34,8 +34,8 @@ class ParseClient {
     }
     
     class func loadStudentLocations(completion: @escaping (Bool, Error?) -> Void) {
-        
-        var request = URLRequest(url: Endpoints.test.url)
+        print("loadStudentLocations START")
+        var request = URLRequest(url: Endpoints.getStudentLocations.url)
         
         request.addValue(ParseSecrets.applicationId, forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue(ParseSecrets.apiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
@@ -47,6 +47,9 @@ class ParseClient {
                 DispatchQueue.main.async {
                     completion(false, error)
                 }
+                
+                print("loadStudentLocations NO DATA")
+                
                 return
             }
             
@@ -56,11 +59,14 @@ class ParseClient {
 
                 DataModel.studentInformationList = responseObject.results
                 
+                print("loadStudentLocations SUCCESS")
+                
                 DispatchQueue.main.async {
                     completion(true, nil)
                 }
 
             } catch {
+                print("loadStudentLocations ERROR")
                 DispatchQueue.main.async {
                     completion(false, error)
                 }

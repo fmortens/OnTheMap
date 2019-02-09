@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TableViewController: UIViewController {
+class TableViewController: CustomViewController {
     
     @IBOutlet var tableView: UITableView!
     
@@ -49,12 +49,11 @@ class TableViewController: UIViewController {
     }
     
     @objc
-    func requestData() {
-        print("TableView REQUEST DATA")
+    override func requestData() {
         ParseClient.loadStudentLocations(completion: handleStudentLocationsResult)
     }
 
-    func handleStudentLocationsResult(success: Bool, error: Error?) {
+    override func handleStudentLocationsResult(success: Bool, error: Error?) {
         let deadline = DispatchTime.now() + .milliseconds(500)
         DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
             self.refreshControl.endRefreshing()
