@@ -227,6 +227,9 @@
                                         <state key="normal" title="Find Location">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didTapFindLocationButton:" destination="oPx-Kr-boq" eventType="touchUpInside" id="zh3-Cs-DYy"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -255,6 +258,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="linkTextInput" destination="bpy-Av-BcM" id="Jg5-c4-9VF"/>
+                        <outlet property="locationTextInput" destination="oPe-Nu-GFV" id="L5b-Z5-UVE"/>
                         <segue destination="zCp-Tn-ESM" kind="show" id="aMJ-fL-zf7"/>
                     </connections>
                 </viewController>
