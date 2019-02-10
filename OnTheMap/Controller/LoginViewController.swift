@@ -24,10 +24,6 @@ class LoginViewController: CustomViewController {
         self.usernameTextField.delegate = textFieldDelegate
         self.passwordTextField.delegate = textFieldDelegate
         
-        // TODO: Remember to remove these before submitting too late.
-        usernameTextField.text = "fmortens@me.com"
-        passwordTextField.text = "blubb"
-        
         // Adjust view for keyboard
         NotificationCenter.default.addObserver(
             self,
