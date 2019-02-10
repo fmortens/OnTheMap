@@ -64,7 +64,7 @@ class ParseClient {
             
             let decoder = JSONDecoder()
             do {
-                let responseObject = try decoder.decode(StudentLocationsResult.self, from: data)
+                let responseObject = try decoder.decode(GetStudentLocationsResponse.self, from: data)
 
                 DataModel.studentInformationList = responseObject.results
                 
