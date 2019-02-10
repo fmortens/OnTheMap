@@ -13,12 +13,30 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    let textFieldDelegate = TextFieldDelegate()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.usernameTextField.delegate = textFieldDelegate
+        self.passwordTextField.delegate = textFieldDelegate
         
         // TODO: Remember to remove these before submitting too late.
         usernameTextField.text = "fmortens@me.com"
         passwordTextField.text = "blubb"
+        
+        // Adjust view for keyboard
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(InformationPostingViewController.keyboardWillShow),
+            name: UIResponder.keyboardDidShowNotification, object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(InformationPostingViewController.keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil
+        )
     }
     
     func handleLoginResponse(success: Bool, error: LoginErrorType?) {
@@ -68,6 +86,30 @@ class LoginViewController: UIViewController {
             let alertVC = UIAlertController(title: "Login Failed", message: (error as! String), preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             show(alertVC, sender: nil)
+        }
+    }
+    
+    // Handle keyboard
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        
+        let keyboardFrame = keyboardSize.cgRectValue
+        
+        
+        if self.view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= keyboardFrame.height / 2
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        
+        let keyboardFrame = keyboardSize.cgRectValue
+        
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y += keyboardFrame.height / 2
         }
     }
     

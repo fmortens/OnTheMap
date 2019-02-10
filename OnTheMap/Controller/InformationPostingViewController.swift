@@ -30,7 +30,18 @@ class InformationPostingViewController: UIViewController {
             self.linkTextInput.text = DataModel.studentInformation?.mediaURL
         }
         
-        print("addLocationViewController")
+        // Adjust view for keyboard
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(InformationPostingViewController.keyboardWillShow),
+            name: UIResponder.keyboardDidShowNotification, object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(InformationPostingViewController.keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification, object: nil
+        )
         
     }
     
@@ -70,6 +81,28 @@ class InformationPostingViewController: UIViewController {
         
         self.performSegue(withIdentifier: "addLocationMap", sender: nil)
         
+    }
+    
+    // Handle keyboard
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        
+        let keyboardFrame = keyboardSize.cgRectValue
+        
+        if self.view.frame.origin.y == 0{
+            self.view.frame.origin.y -= keyboardFrame.height / 2
+        }
+    }
+    @objc func keyboardWillHide(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        
+        let keyboardFrame = keyboardSize.cgRectValue
+        
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y += keyboardFrame.height / 2
+        }
     }
     
     @IBAction func didTapCancelButton(_ sender: Any) {
