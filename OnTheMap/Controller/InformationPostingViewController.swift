@@ -55,10 +55,10 @@ class InformationPostingViewController: UIViewController {
         
         guard let placeMark = placeMark else {
             print("COULD NOT RESOLVE LOCATION!")
-            let alertVC = UIAlertController(title: "Error", message: "Could not resolve location!", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let alertController = UIAlertController(title: "Error", message: "Could not resolve location!", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             
-            self.present(alertVC, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
             
             return
         }

@@ -38,8 +38,6 @@ class TableViewController: CustomViewController {
         }
         
         requestData()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,13 +50,33 @@ class TableViewController: CustomViewController {
     override func requestData() {
         ParseClient.loadStudentLocations(completion: handleStudentLocationsResult)
     }
-
+    
     override func handleStudentLocationsResult(success: Bool, error: Error?) {
-        let deadline = DispatchTime.now() + .milliseconds(500)
-        DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
-            self.refreshControl.endRefreshing()
-        })
-
-        self.tableView.reloadData()
+        
+        if success {
+            let deadline = DispatchTime.now() + .milliseconds(500)
+            DispatchQueue.main.asyncAfter(deadline: deadline, execute: {
+                self.refreshControl.endRefreshing()
+            })
+            
+            self.tableView.reloadData()
+        } else {
+            let alertController = UIAlertController(
+                title: "Network failure",
+                message: "Could not fetch location data. Please try again.",
+                preferredStyle: .alert
+            )
+            
+            alertController.addAction(
+                UIAlertAction(
+                    title: "OK",
+                    style: .default,
+                    handler: nil
+                )
+            )
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
     }
 }

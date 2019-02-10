@@ -16,13 +16,13 @@ extension CustomViewController: MKMapViewDelegate {
             self.dismiss(animated: true, completion: nil)
         } else {
             
-            let alertVC = UIAlertController(
+            let alertController = UIAlertController(
                 title: "Logout Failed",
                 message: "Ok, for some weird reason we could not log out. Please try again :/",
                 preferredStyle: .alert
             )
             
-            alertVC.addAction(
+            alertController.addAction(
                 UIAlertAction(
                     title: "OK",
                     style: .default,
@@ -30,7 +30,7 @@ extension CustomViewController: MKMapViewDelegate {
                 )
             )
             
-            show(alertVC, sender: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -38,7 +38,6 @@ extension CustomViewController: MKMapViewDelegate {
     // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
     // method in TableViewDataSource.
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
         let reuseId = "pin"
         
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
@@ -68,15 +67,11 @@ extension CustomViewController: MKMapViewDelegate {
     }
     
     @IBAction func logoutTapped(_ sender: UIBarButtonItem) {
-        
         UdacityClient.logout(completion: handleLogoutResponse)
-        
     }
     
     @IBAction func didTapRefreshButton(_ sender: Any) {
-        print("didTapRefreshButton")
         self.requestData()
-        
     }
     
 }

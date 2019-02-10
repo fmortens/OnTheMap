@@ -10,13 +10,6 @@ import UIKit
 
 class CustomViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view, typically from a nib.
-
-    }
-    
     @objc
     func requestData() {
         // please override

@@ -26,8 +26,6 @@ class MapViewController: CustomViewController {
     }
     
     func updatePins() {
-        print("updatePins")
-        
         self.mapView.removeAnnotations(annotations)
         annotations = [MKPointAnnotation]()
         
@@ -63,18 +61,32 @@ class MapViewController: CustomViewController {
     
     @objc
     override func requestData() {
-        print("MapView REQUEST DATA")
         activityIndicator.startAnimating()
         ParseClient.loadStudentLocations(completion: handleStudentLocationsResult)
     }
     
     override func handleStudentLocationsResult(success: Bool, error: Error?) {
         activityIndicator.stopAnimating()
-
-        print("MapView handleStudentLocationsResult")
         
-        
-        updatePins()
+        if success {
+            updatePins()
+        } else {
+            let alertController = UIAlertController(
+                title: "Network failure",
+                message: "Could not fetch location data. Please try again.",
+                preferredStyle: .alert
+            )
+            
+            alertController.addAction(
+                UIAlertAction(
+                    title: "OK",
+                    style: .default,
+                    handler: nil
+                )
+            )
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
 }

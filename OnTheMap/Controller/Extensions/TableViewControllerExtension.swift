@@ -36,8 +36,6 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        print("row \(indexPath.row) was tapped")
-        
         if let mediaURL = DataModel.studentInformationList[indexPath.row].mediaURL, let url = URL(string: mediaURL) {
             UIApplication.shared.open(url)
         }

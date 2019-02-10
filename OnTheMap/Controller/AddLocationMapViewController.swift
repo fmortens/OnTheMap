@@ -50,19 +50,42 @@ class AddLocationMapViewController: CustomViewController {
         activityIndicator.stopAnimating()
         
         if success {
-            print("SUCCESS")
-            
-            print("\(String(describing: DataModel.studentInformation))")
-            
             self.presentingViewController?.dismiss(
                 animated: true, completion: nil
             )
-
         } else {
             if let error = error {
-                print("ERROR \(error)")
+                let alertController = UIAlertController(
+                    title: "Network failure",
+                    message: "Could not send location, please try again.",
+                    preferredStyle: .alert
+                )
+                
+                alertController.addAction(
+                    UIAlertAction(
+                        title: "OK",
+                        style: .default,
+                        handler: nil
+                    )
+                )
+                
+                self.present(alertController, animated: true, completion: nil)
             } else {
-                print("ERROR UNKNOWN")
+                let alertController = UIAlertController(
+                    title: "Network failure",
+                    message: "Unknown error occurred, please try again.",
+                    preferredStyle: .alert
+                )
+                
+                alertController.addAction(
+                    UIAlertAction(
+                        title: "OK",
+                        style: .default,
+                        handler: nil
+                    )
+                )
+                
+                self.present(alertController, animated: true, completion: nil)
             }
             
         }

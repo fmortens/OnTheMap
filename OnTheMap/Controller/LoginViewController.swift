@@ -43,13 +43,12 @@ class LoginViewController: UIViewController {
     }
     
     func handleLoginResponse(success: Bool, error: LoginErrorType?) {
-        
         if success {
             
             if let accountKey = UdacityClient.Auth.account?.key {
                 UdacityClient.getPublicUserData(userId: accountKey, completion: handleGetPublicUserData(success:error:))
             }
-        
+            
         } else {
             var errorMessage = LoginErrorType.Unknown.rawValue
             
@@ -57,18 +56,17 @@ class LoginViewController: UIViewController {
                 errorMessage = error.rawValue
             }
             
-            let alertVC = UIAlertController(title: "Login Failed", message: errorMessage, preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            show(alertVC, sender: nil)
+            let alertController = UIAlertController(title: "Login Failed", message: errorMessage, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 
     func handleGetPublicUserData(success: Bool, error: NetworkErrorType?) {
+        
         if success {
-            
             ParseClient.loadStudentLocations(completion: handleStudentLocationsResult(success:error:))
-            
-            
         } else {
             var errorMessage = "Ok, something weird is goind on."
             
@@ -76,10 +74,11 @@ class LoginViewController: UIViewController {
                 errorMessage = error.rawValue
             }
             
-            let alertVC = UIAlertController(title: "Data fetch failed", message: errorMessage, preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            show(alertVC, sender: nil)
+            let alertController = UIAlertController(title: "Data fetch failed", message: errorMessage, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
         }
+        
     }
     
     func handleStudentLocationsResult(success: Bool, error: Error?) {
@@ -88,8 +87,16 @@ class LoginViewController: UIViewController {
         if success {
             self.performSegue(withIdentifier: "successfulLogin", sender: nil)
         } else {
-            let alertVC = UIAlertController(title: "Login Failed", message: "Network error occurred, please try again.", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let alertVC = UIAlertController(
+                title: "Login Failed",
+                message: "Network error occurred, please try again.",
+                preferredStyle: .alert
+            )
+            
+            alertVC.addAction(
+                UIAlertAction(title: "OK", style: .default, handler: nil)
+            )
+            
             show(alertVC, sender: nil)
         }
     }
@@ -100,7 +107,6 @@ class LoginViewController: UIViewController {
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         
         let keyboardFrame = keyboardSize.cgRectValue
-        
         
         if self.view.frame.origin.y == 0 {
             self.view.frame.origin.y -= keyboardFrame.height / 2
@@ -121,7 +127,6 @@ class LoginViewController: UIViewController {
     @IBAction func didTapLoginButton(_ sender: Any) {
         
         if let username = usernameTextField.text, let password = passwordTextField.text {
-            
             activityIndicator.startAnimating()
             
             UdacityClient.login(
@@ -133,8 +138,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func didTapSignupButton(_ sender: Any) {
-        
         UIApplication.shared.open(UdacityClient.Endpoints.signup.url)
-        
     }
 }
