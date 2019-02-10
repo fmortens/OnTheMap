@@ -15,11 +15,13 @@ class AddLocationMapViewController: UIViewController {
     var annotation: MKPointAnnotation?
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Using DataModel instead of passing via segue since we will POST data later
+        activityIndicator.scale(factor: 5)
         
         let annotation = MKPointAnnotation()
         annotation.coordinate =  CLLocationCoordinate2D(
@@ -44,6 +46,9 @@ class AddLocationMapViewController: UIViewController {
         )
     }
     func handlePostLocation(success: Bool, error: Error?) {
+        
+        activityIndicator.stopAnimating()
+        
         if success {
             print("SUCCESS")
             
@@ -65,6 +70,8 @@ class AddLocationMapViewController: UIViewController {
     }
     
     @IBAction func didTapFinishButton(_ sender: Any) {
+        
+        activityIndicator.startAnimating()
         
         if (DataModel.studentInformation?.objectId) != nil {
             ParseClient.putStudentLocation(

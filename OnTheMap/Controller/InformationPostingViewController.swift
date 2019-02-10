@@ -14,6 +14,7 @@ class InformationPostingViewController: UIViewController {
     
     @IBOutlet weak var locationTextInput: UITextField!
     @IBOutlet weak var linkTextInput: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var activeField: UITextField?
     let textFieldDelegate = TextFieldDelegate()
@@ -22,6 +23,9 @@ class InformationPostingViewController: UIViewController {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        
+        activityIndicator.scale(factor: 5)
+        
         self.locationTextInput.delegate = textFieldDelegate
         self.linkTextInput.delegate = textFieldDelegate
         
@@ -46,6 +50,9 @@ class InformationPostingViewController: UIViewController {
     }
     
     func handleGeocodeAddress(placeMark: [CLPlacemark]?, error: Error?) {
+        
+        activityIndicator.stopAnimating()
+        
         guard let placeMark = placeMark else {
             print("COULD NOT RESOLVE LOCATION!")
             let alertVC = UIAlertController(title: "Error", message: "Could not resolve location!", preferredStyle: .alert)
@@ -114,6 +121,7 @@ class InformationPostingViewController: UIViewController {
     }
     
     @IBAction func didTapFindLocationButton(_ sender: Any) {
+        activityIndicator.startAnimating()
         
         if let addressString = self.locationTextInput.text,
            let linkText = self.linkTextInput.text {
@@ -125,6 +133,7 @@ class InformationPostingViewController: UIViewController {
             if errorMessage != "" {
                 print("Something is wrong")
                 
+                activityIndicator.stopAnimating()
                 
                 let alertVC = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
                 alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

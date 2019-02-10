@@ -91,17 +91,23 @@
                                     <constraint firstItem="JTC-m2-g49" firstAttribute="leading" secondItem="imu-b9-nnS" secondAttribute="leading" constant="16" id="YBU-3e-rZ3"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8a9-cS-jwm" userLabel="Activity Indicator">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="imu-b9-nnS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="JkF-15-zAq"/>
                             <constraint firstItem="imu-b9-nnS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NRk-tW-mjj"/>
+                            <constraint firstItem="8a9-cS-jwm" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Nt6-GI-ZGh"/>
+                            <constraint firstItem="8a9-cS-jwm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hXh-Wo-oVh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="imu-b9-nnS" secondAttribute="trailing" constant="16" id="pAo-KD-SHD"/>
                             <constraint firstItem="imu-b9-nnS" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="swY-2F-vX1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="8a9-cS-jwm" id="CDB-cx-chA"/>
                         <outlet property="passwordTextField" destination="JTC-m2-g49" id="2oy-Co-qB3"/>
                         <outlet property="usernameTextField" destination="rAs-vL-h1Q" id="1J0-gk-0C1"/>
                         <segue destination="JxZ-te-t7d" kind="presentation" identifier="successfulLogin" id="Dyk-kY-zer"/>
@@ -125,11 +131,16 @@
                                     <outlet property="delegate" destination="4jK-zP-rwz" id="F8u-7g-gAB"/>
                                 </connections>
                             </mapView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9gI-xX-3B8" userLabel="Activity Indicator">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="9gI-xX-3B8" firstAttribute="centerX" secondItem="9RN-Tw-ks6" secondAttribute="centerX" id="75l-H3-ijp"/>
                             <constraint firstItem="w2X-Cb-ra7" firstAttribute="top" secondItem="rhS-pB-lLM" secondAttribute="top" id="MrZ-xZ-ikT"/>
                             <constraint firstItem="rhS-pB-lLM" firstAttribute="trailing" secondItem="w2X-Cb-ra7" secondAttribute="trailing" id="S2a-8h-LF7"/>
+                            <constraint firstItem="9gI-xX-3B8" firstAttribute="centerY" secondItem="9RN-Tw-ks6" secondAttribute="centerY" id="TJk-ii-3P0"/>
                             <constraint firstItem="w2X-Cb-ra7" firstAttribute="leading" secondItem="rhS-pB-lLM" secondAttribute="leading" id="w21-5H-eal"/>
                             <constraint firstItem="w2X-Cb-ra7" firstAttribute="bottom" secondItem="rhS-pB-lLM" secondAttribute="bottom" id="zDF-NA-gY2"/>
                         </constraints>
@@ -155,6 +166,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="9gI-xX-3B8" id="5f9-Gw-Lfd"/>
                         <outlet property="mapView" destination="w2X-Cb-ra7" id="xbS-Pp-iUY"/>
                     </connections>
                 </viewController>
@@ -243,11 +255,16 @@
                                     <constraint firstItem="oPe-Nu-GFV" firstAttribute="leading" secondItem="Bpb-0X-uY8" secondAttribute="leading" constant="16" id="kxf-L0-u1a"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="acS-1i-14T" userLabel="Activity Indicator">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4dW-3q-c8n" firstAttribute="trailing" secondItem="Bpb-0X-uY8" secondAttribute="trailing" constant="16" id="0Ub-LK-F7u"/>
+                            <constraint firstItem="acS-1i-14T" firstAttribute="centerY" secondItem="BNa-de-QfA" secondAttribute="centerY" id="DAU-av-CjE"/>
                             <constraint firstItem="Bpb-0X-uY8" firstAttribute="leading" secondItem="4dW-3q-c8n" secondAttribute="leading" constant="16" id="bEx-ij-8j9"/>
+                            <constraint firstItem="acS-1i-14T" firstAttribute="centerX" secondItem="BNa-de-QfA" secondAttribute="centerX" id="dmG-HF-nBZ"/>
                             <constraint firstItem="Bpb-0X-uY8" firstAttribute="centerY" secondItem="BNa-de-QfA" secondAttribute="centerY" id="iQO-8j-wOP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4dW-3q-c8n"/>
@@ -260,6 +277,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="acS-1i-14T" id="c8J-md-5tX"/>
                         <outlet property="linkTextInput" destination="bpy-Av-BcM" id="Jg5-c4-9VF"/>
                         <outlet property="locationTextInput" destination="oPe-Nu-GFV" id="L5b-Z5-UVE"/>
                         <segue destination="zCp-Tn-ESM" kind="show" identifier="addLocationMap" id="aMJ-fL-zf7"/>
@@ -415,6 +433,9 @@
                                     <action selector="didTapFinishButton:" destination="zCp-Tn-ESM" eventType="touchUpInside" id="Qb9-yn-Z9I"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="zAj-NT-i2R" userLabel="Activity Indicator">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -424,11 +445,14 @@
                             <constraint firstItem="2BD-ye-N4T" firstAttribute="bottom" secondItem="Gnw-34-GCA" secondAttribute="bottom" constant="16" id="FeO-L4-C5O"/>
                             <constraint firstItem="pp4-KU-49R" firstAttribute="top" secondItem="2BD-ye-N4T" secondAttribute="top" id="JUe-uB-q87"/>
                             <constraint firstItem="2BD-ye-N4T" firstAttribute="trailing" secondItem="pp4-KU-49R" secondAttribute="trailing" id="OiO-aS-EwR"/>
+                            <constraint firstItem="zAj-NT-i2R" firstAttribute="centerY" secondItem="U16-aq-aTP" secondAttribute="centerY" id="lgs-Pw-usj"/>
                             <constraint firstItem="2BD-ye-N4T" firstAttribute="trailing" secondItem="Gnw-34-GCA" secondAttribute="trailing" constant="16" id="rQu-rH-8aR"/>
+                            <constraint firstItem="zAj-NT-i2R" firstAttribute="centerX" secondItem="U16-aq-aTP" secondAttribute="centerX" id="vKf-vh-KTX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2BD-ye-N4T"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="zAj-NT-i2R" id="xvI-QN-Zls"/>
                         <outlet property="mapView" destination="pp4-KU-49R" id="mDc-Q3-YI9"/>
                     </connections>
                 </viewController>

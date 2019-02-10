@@ -12,11 +12,14 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let textFieldDelegate = TextFieldDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.scale(factor: 5)
         
         self.usernameTextField.delegate = textFieldDelegate
         self.passwordTextField.delegate = textFieldDelegate
@@ -80,6 +83,8 @@ class LoginViewController: UIViewController {
     }
     
     func handleStudentLocationsResult(success: Bool, error: Error?) {
+        activityIndicator.stopAnimating()
+        
         if success {
             self.performSegue(withIdentifier: "successfulLogin", sender: nil)
         } else {
@@ -116,6 +121,9 @@ class LoginViewController: UIViewController {
     @IBAction func didTapLoginButton(_ sender: Any) {
         
         if let username = usernameTextField.text, let password = passwordTextField.text {
+            
+            activityIndicator.startAnimating()
+            
             UdacityClient.login(
                 username: username,
                 password: password,
@@ -131,3 +139,10 @@ class LoginViewController: UIViewController {
     }
 }
 
+extension UIActivityIndicatorView {
+    func scale(factor: CGFloat) {
+        guard factor > 0.0 else { return }
+        
+        transform = CGAffineTransform(scaleX: factor, y: factor)
+    }
+}

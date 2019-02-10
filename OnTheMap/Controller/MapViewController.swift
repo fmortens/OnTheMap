@@ -14,11 +14,13 @@ class MapViewController: CustomViewController {
     var annotations = [MKPointAnnotation]()
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        activityIndicator.scale(factor: 5)
         
         updatePins()
     }
@@ -62,10 +64,13 @@ class MapViewController: CustomViewController {
     @objc
     override func requestData() {
         print("MapView REQUEST DATA")
+        activityIndicator.startAnimating()
         ParseClient.loadStudentLocations(completion: handleStudentLocationsResult)
     }
     
     override func handleStudentLocationsResult(success: Bool, error: Error?) {
+        activityIndicator.stopAnimating()
+
         print("MapView handleStudentLocationsResult")
         
         
