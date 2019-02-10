@@ -46,7 +46,7 @@ class UdacityClient {
         }
     }
     
-    class func login(username: String, password: String, completion: @escaping (Bool, LoginErrorType?) -> Void) {
+    class func login(username: String, password: String, completion: @escaping (Bool, ErrorType?) -> Void) {
         
         let body = LoginRequest(username: username, password: password)
         
@@ -59,7 +59,7 @@ class UdacityClient {
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             guard let data = data else {
                 DispatchQueue.main.async {
-                  completion(false, LoginErrorType.NetworkError)
+                  completion(false, ErrorType.NetworkError)
                 }
                 return
             }
@@ -74,7 +74,7 @@ class UdacityClient {
                 
                 if responseObject.error != nil {
                     DispatchQueue.main.async {
-                        completion(false, LoginErrorType.WrongCredentials)
+                        completion(false, ErrorType.LoginFailure)
                     }
                 }
                 
@@ -84,7 +84,7 @@ class UdacityClient {
                 } else {
                     // I mean, if we can't get session or account something must be wrong
                     DispatchQueue.main.async {
-                        completion(false, LoginErrorType.Unknown)
+                        completion(false, ErrorType.Unknown)
                     }
                 }
                 
@@ -93,9 +93,8 @@ class UdacityClient {
                 }
                 
             } catch {
-                print(error)
                 DispatchQueue.main.async {
-                  completion(false, LoginErrorType.Unknown)
+                  completion(false, ErrorType.DecodeError)
                 }
             }
         }
@@ -146,7 +145,7 @@ class UdacityClient {
         
     }
     
-    class func getPublicUserData(userId: String, completion: @escaping (Bool, NetworkErrorType?) -> Void) {
+    class func getPublicUserData(userId: String, completion: @escaping (Bool, ErrorType?) -> Void) {
         
         let request = URLRequest(url: Endpoints.getPublicUserData(userId).url)
         let session = URLSession.shared
@@ -155,15 +154,13 @@ class UdacityClient {
             
             guard let data = data else {
                 DispatchQueue.main.async {
-                    print("Missing data!")
-                    completion(false, NetworkErrorType.GenericError)
+                    completion(false, ErrorType.NetworkError)
                 }
                 return
             }
             
             let decoder = JSONDecoder()
             do {
-                
                 let newData = data.subdata(in: 5..<data.count)
                 let responseObject = try decoder.decode(PublicUserDataResponse.self, from: newData)
                 
@@ -173,10 +170,8 @@ class UdacityClient {
                     completion(true, nil)
                 }
             } catch {
-                print(error)
-                
                 DispatchQueue.main.async {
-                    completion(false, NetworkErrorType.GenericError)
+                    completion(false, ErrorType.DecodeError)
                 }
             }
         }

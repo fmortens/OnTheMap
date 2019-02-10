@@ -8,12 +8,11 @@
 
 import Foundation
 
-enum LoginErrorType: String {
-    case WrongCredentials = "Username or password is incorrect"
-    case NetworkError = "Could not reach servers"
+enum ErrorType: String {
+    case LoginFailure = "Username or password is incorrect. Please try again."
+    case NetworkError = "A network error has occurred. Please try again."
+    case DecodeError = "Could not read received data"
+    case PostError = "Could not send data"
+    case PutError = "Could not update data"
     case Unknown = "An unknown error has occurred"
-}
-
-enum NetworkErrorType: String {
-    case GenericError = "An unknown error has occurred"
 }

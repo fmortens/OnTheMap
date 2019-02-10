@@ -65,7 +65,7 @@ class MapViewController: CustomViewController {
         ParseClient.loadStudentLocations(completion: handleStudentLocationsResult)
     }
     
-    override func handleStudentLocationsResult(success: Bool, error: Error?) {
+    override func handleStudentLocationsResult(success: Bool, error: ErrorType?) {
         activityIndicator.stopAnimating()
         
         if success {
@@ -73,7 +73,7 @@ class MapViewController: CustomViewController {
         } else {
             alertUser(
                 title: "Network failure",
-                message: "Could not fetch location data. Please try again."
+                message: error!.rawValue
             )
         }
     }

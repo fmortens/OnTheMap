@@ -51,7 +51,7 @@ class TableViewController: CustomViewController {
         ParseClient.loadStudentLocations(completion: handleStudentLocationsResult)
     }
     
-    override func handleStudentLocationsResult(success: Bool, error: Error?) {
+    override func handleStudentLocationsResult(success: Bool, error: ErrorType?) {
         
         if success {
             let deadline = DispatchTime.now() + .milliseconds(500)
@@ -63,7 +63,7 @@ class TableViewController: CustomViewController {
         } else {
             alertUser(
                 title: "Network failure",
-                message: "Could not fetch location data. Please try again."
+                message: error!.rawValue
              )
         }
     }

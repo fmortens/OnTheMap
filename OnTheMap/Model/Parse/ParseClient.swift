@@ -42,7 +42,7 @@ class ParseClient {
         }
     }
     
-    class func loadStudentLocations(completion: @escaping (Bool, Error?) -> Void) {
+    class func loadStudentLocations(completion: @escaping (Bool, ErrorType?) -> Void) {
         print("loadStudentLocations START")
         var request = URLRequest(url: Endpoints.getStudentLocations.url)
         
@@ -54,10 +54,8 @@ class ParseClient {
             
             guard let data = data else {
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion(false, ErrorType.NetworkError)
                 }
-                
-                print("loadStudentLocations NO DATA")
                 
                 return
             }
@@ -68,16 +66,13 @@ class ParseClient {
 
                 DataModel.studentInformationList = responseObject.results
                 
-                print("loadStudentLocations SUCCESS")
-                
                 DispatchQueue.main.async {
                     completion(true, nil)
                 }
 
             } catch {
-                print("loadStudentLocations ERROR")
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion(false, ErrorType.DecodeError)
                 }
             }
             
@@ -87,12 +82,10 @@ class ParseClient {
         
     }
     
-    class func putStudentLocation(location: StudentInformation, completion: @escaping (Bool, Error?) -> Void) {
+    class func putStudentLocation(location: StudentInformation, completion: @escaping (Bool, ErrorType?) -> Void) {
         let body = location
         
         var request = URLRequest(url: Endpoints.putStudentLocation(location.objectId!).url)
-        
-        print("SENDING: \(String(describing: location))")
         
         request.httpMethod = "PUT"
         
@@ -104,7 +97,7 @@ class ParseClient {
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             guard let data = data else {
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion(false, ErrorType.NetworkError)
                 }
                 return
             }
@@ -123,7 +116,7 @@ class ParseClient {
             } catch {
                 print(error)
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion(false, ErrorType.DecodeError)
                 }
             }
         }
@@ -132,14 +125,12 @@ class ParseClient {
         
     }
     
-    class func postStudentLocation(location: StudentInformation, completion: @escaping (Bool, Error?) -> Void) {
+    class func postStudentLocation(location: StudentInformation, completion: @escaping (Bool, ErrorType?) -> Void) {
         
         
         let body = location
         
         var request = URLRequest(url: Endpoints.postStudentLocation.url)
-        
-        print("SENDING: \(String(describing: location))")
         
         request.httpMethod = location.objectId != nil ? "PUT" : "POST"
         
@@ -151,7 +142,7 @@ class ParseClient {
         let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
             guard let data = data else {
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion(false, ErrorType.NetworkError)
                 }
                 return
             }
@@ -169,9 +160,8 @@ class ParseClient {
                 }
                 
             } catch {
-                print(error)
                 DispatchQueue.main.async {
-                    completion(false, error)
+                    completion(false, ErrorType.DecodeError)
                 }
             }
         }

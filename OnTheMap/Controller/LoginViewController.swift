@@ -42,15 +42,17 @@ class LoginViewController: CustomViewController {
         )
     }
     
-    func handleLoginResponse(success: Bool, error: LoginErrorType?) {
+    func handleLoginResponse(success: Bool, error: ErrorType?) {
+        
         if success {
-            
             if let accountKey = UdacityClient.Auth.account?.key {
                 UdacityClient.getPublicUserData(userId: accountKey, completion: handleGetPublicUserData(success:error:))
             }
             
         } else {
-            var errorMessage = LoginErrorType.Unknown.rawValue
+            activityIndicator.stopAnimating()
+            
+            var errorMessage = ErrorType.Unknown.rawValue
             
             if let error = error {
                 errorMessage = error.rawValue
@@ -63,12 +65,12 @@ class LoginViewController: CustomViewController {
         }
     }
 
-    func handleGetPublicUserData(success: Bool, error: NetworkErrorType?) {
+    func handleGetPublicUserData(success: Bool, error: ErrorType?) {
         
         if success {
             ParseClient.loadStudentLocations(completion: handleStudentLocationsResult(success:error:))
         } else {
-            var errorMessage = "Ok, something weird is goind on."
+            var errorMessage = ErrorType.Unknown.rawValue
             
             if let error = error {
                 errorMessage = error.rawValue
@@ -82,7 +84,7 @@ class LoginViewController: CustomViewController {
         
     }
     
-    override func handleStudentLocationsResult(success: Bool, error: Error?) {
+    override func handleStudentLocationsResult(success: Bool, error: ErrorType?) {
         activityIndicator.stopAnimating()
         
         if success {
@@ -90,7 +92,7 @@ class LoginViewController: CustomViewController {
         } else {
             alertUser(
                 title: "Login Failed",
-                message: "Network error occurred, please try again."
+                message: error!.rawValue
             )
         }
     }

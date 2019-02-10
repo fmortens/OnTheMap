@@ -45,7 +45,7 @@ class AddLocationMapViewController: CustomViewController {
             animated: true
         )
     }
-    func handlePostLocation(success: Bool, error: Error?) {
+    func handlePostLocation(success: Bool, error: ErrorType?) {
         
         activityIndicator.stopAnimating()
         
@@ -57,12 +57,12 @@ class AddLocationMapViewController: CustomViewController {
             if let error = error {
                 alertUser(
                     title: "Network failure",
-                    message: "Could not send location, please try again."
+                    message: error.rawValue
                 )
             } else {
                 alertUser(
                     title: "Network failure",
-                    message: "Unknown error occurred, please try again."
+                    message: ErrorType.Unknown.rawValue
                 )
             }
             

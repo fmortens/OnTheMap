@@ -33,7 +33,7 @@ class CustomViewController: UIViewController {
         // please override
     }
     
-    func handleStudentLocationsResult(success: Bool, error: Error?) {
+    func handleStudentLocationsResult(success: Bool, error: ErrorType?) {
         // please override
     }
     
