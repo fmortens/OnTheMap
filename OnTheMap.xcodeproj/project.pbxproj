@@ -92,7 +92,6 @@
 				DE60B8A4220CBA120081C21B /* GetStudentLocationsResponse.swift */,
 				DEF6379A2210B53600C9F1B4 /* PostLocationResponse.swift */,
 				DEF637982210B51100C9F1B4 /* PutLocationResponse.swift */,
-				DEF6379C2210B55400C9F1B4 /* StudentInformation.swift */,
 			);
 			path = Parse;
 			sourceTree = "<group>";
@@ -136,10 +135,10 @@
 		DEC67E69220B47C700FE1F28 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				DEF6379E2210CA9900C9F1B4 /* Extensions */,
 				DEC67E59220B478300FE1F28 /* LoginViewController.swift */,
 				DE60B896220CA6F30081C21B /* MapViewController.swift */,
 				DE60B898220CA7370081C21B /* TableViewController.swift */,
-				DE60B89A220CA8630081C21B /* CustomViewControllerExtension.swift */,
 				DE580DF1220F09770013DB31 /* CustomViewController.swift */,
 				DE464F70220F5DFE0093641C /* InformationPostingViewController.swift */,
 				DE491DE3220F8C6C00528443 /* AddLocationMapViewController.swift */,
@@ -160,7 +159,7 @@
 		DEC67E6B220B480600FE1F28 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				DEF637852210B37F00C9F1B4 /* DataTypes */,
+				DEF637852210B37F00C9F1B4 /* SharedTypes */,
 				DE60B8A3220CB9D80081C21B /* Data */,
 				DEC67E6C220B481500FE1F28 /* Udacity */,
 				DE60B89C220CB5790081C21B /* Parse */,
@@ -179,7 +178,7 @@
 			path = Udacity;
 			sourceTree = "<group>";
 		};
-		DEF637852210B37F00C9F1B4 /* DataTypes */ = {
+		DEF637852210B37F00C9F1B4 /* SharedTypes */ = {
 			isa = PBXGroup;
 			children = (
 				DEF637862210B3A700C9F1B4 /* Account.swift */,
@@ -191,8 +190,17 @@
 				DEF637922210B4BF00C9F1B4 /* Guard.swift */,
 				DEF637942210B4D100C9F1B4 /* Permission.swift */,
 				DEF637962210B4E700C9F1B4 /* Ref.swift */,
+				DEF6379C2210B55400C9F1B4 /* StudentInformation.swift */,
 			);
-			path = DataTypes;
+			path = SharedTypes;
+			sourceTree = "<group>";
+		};
+		DEF6379E2210CA9900C9F1B4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DE60B89A220CA8630081C21B /* CustomViewControllerExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

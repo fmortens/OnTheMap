@@ -65,8 +65,6 @@ class InformationPostingViewController: UIViewController {
         
         if let mapString = self.locationTextInput.text, let mediaUrl = self.linkTextInput.text {
             
-             print("BEFORE: \(String(describing: DataModel.studentInformation))")
-            
             // Preserve objectId to be able to update rather than post new
             let objectId = DataModel.studentInformation?.objectId
             
@@ -81,9 +79,6 @@ class InformationPostingViewController: UIViewController {
                 uniqueKey: UdacityClient.Auth.account!.key,
                 objectId: objectId
             )
-            
-            print("AFTER: \(String(describing: DataModel.studentInformation))")
-            
         }
         
         self.performSegue(withIdentifier: "addLocationMap", sender: nil)
@@ -123,25 +118,18 @@ class InformationPostingViewController: UIViewController {
     @IBAction func didTapFindLocationButton(_ sender: Any) {
         activityIndicator.startAnimating()
         
-        if let addressString = self.locationTextInput.text,
-           let linkText = self.linkTextInput.text {
-            
-            print("FIND LOCATION")
+        if let addressString = self.locationTextInput.text, let linkText = self.linkTextInput.text {
             
             let errorMessage = addressString == "" ? "Missing address" : linkText == "" ? "Missing link" : ""
             
             if errorMessage != "" {
-                print("Something is wrong")
-                
                 activityIndicator.stopAnimating()
                 
                 let alertVC = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
                 alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 self.present(alertVC, animated: true, completion: nil)
                 
-                
             } else {
-                print("we are good")
                 let geocoder = CLGeocoder()
                 geocoder.geocodeAddressString(
                     addressString,
