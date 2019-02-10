@@ -19,12 +19,16 @@ class ParseClient {
         static let base = "https://parse.udacity.com/parse/classes/StudentLocation"
         
         case getStudentLocations
+        case postStudentLocation
         
         var stringValue: String {
             
             switch self {
                 case .getStudentLocations:
                     return Endpoints.base + "?limit=100&order=-updatedAt"
+                
+                case .postStudentLocation:
+                    return Endpoints.base
             }
         }
         
@@ -75,6 +79,52 @@ class ParseClient {
         }
         
         task.resume()
+        
+    }
+    
+    class func postStudentLocation(location: StudentLocation, completion: @escaping (Bool, Error?) -> Void) {
+        
+        
+        let body = location
+        
+        var request = URLRequest(url: Endpoints.postStudentLocation.url)
+        
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(ParseSecrets.applicationId, forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue(ParseSecrets.apiKey, forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.httpBody = try! JSONEncoder().encode(body)
+        
+        let task = URLSession.shared.dataTask(with: request) {(data, response, error) in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            do {
+                let responseObject = try decoder.decode(PostLocationResult.self, from: data)
+                
+                DataModel.studentInformation!.createdAt = responseObject.createdAt
+                DataModel.studentInformation!.objectId = responseObject.objectId
+                
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+                
+            } catch {
+                print(error)
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        }
+        
+        task.resume()
+        
         
     }
 }

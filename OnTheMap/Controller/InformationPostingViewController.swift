@@ -33,38 +33,35 @@ class InformationPostingViewController: UIViewController {
             print("COULD NOT RESOLVE LOCATION!")
             let alertVC = UIAlertController(title: "Error", message: "Could not resolve location!", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
             self.present(alertVC, animated: true, completion: nil)
             
             return
         }
         
-        
-        
-//        self.performSegue(withIdentifier: "addLocationMap", sender: nil)
-        
-        
-        // Get the storyboard and ResultViewController
-        let addLocationMapViewController = self.storyboard!.instantiateViewController(
-            withIdentifier: "AddLocationMapViewController"
-            ) as! AddLocationMapViewController
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = placeMark[0].location!.coordinate
-        annotation.title = "\(DataModel.publicUserData?.firstName ?? "") \(DataModel.publicUserData?.lastName ?? "")"
-        annotation.subtitle = linkTextInput.text!
-        
-        addLocationMapViewController.annotation = annotation
-        
-        
-        self.navigationController!.pushViewController(
-            addLocationMapViewController,
-            animated: true
+        // Store the data into DataModel
+        DataModel.studentInformation = StudentLocation(
+            createdAt: nil,
+            firstName: DataModel.publicUserData!.firstName,
+            lastName: DataModel.publicUserData!.lastName,
+            latitude: placeMark[0].location!.coordinate.latitude,
+            longitude: placeMark[0].location!.coordinate.longitude,
+            mapString: self.locationTextInput.text!,
+            mediaURL: self.linkTextInput.text!,
+            objectId: nil,
+            uniqueKey: UdacityClient.Auth.account!.key,
+            updatedAt: nil
         )
+        
+        self.performSegue(withIdentifier: "addLocationMap", sender: nil)
         
     }
     
     @IBAction func didTapCancelButton(_ sender: Any) {
-    
+        
+        // Delete data
+        DataModel.studentInformation = nil
+        
         self.dismiss(animated: true, completion: nil)
         
     }
@@ -90,7 +87,10 @@ class InformationPostingViewController: UIViewController {
             } else {
                 print("we are good")
                 let geocoder = CLGeocoder()
-                geocoder.geocodeAddressString(addressString, completionHandler: handleGeocodeAddress(placeMark:error:))
+                geocoder.geocodeAddressString(
+                    addressString,
+                    completionHandler: handleGeocodeAddress(placeMark:error:)
+                )
             }
         }
     }

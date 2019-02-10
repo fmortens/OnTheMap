@@ -10,7 +10,8 @@ import Foundation
 
 class DataModel {
     
-    static var studentInformationList = [StudentInformation]()
+    static var studentInformationList = [StudentLocation]()
     static var publicUserData: PublicUserDataResponse? = nil
-    
+    static var studentInformation: StudentLocation? = nil
+
 }

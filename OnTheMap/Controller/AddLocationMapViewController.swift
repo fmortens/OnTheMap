@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class AddLocationMapViewController: UIViewController {
     
@@ -18,11 +19,45 @@ class AddLocationMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, typically from a nib.
+        // Using DataModel instead of passing via segue since we will POST data later
         
-        if let annotation = annotation {
-            self.mapView.addAnnotation(annotation)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate =  CLLocationCoordinate2D(
+            latitude: DataModel.studentInformation!.latitude!,
+            longitude: DataModel.studentInformation!.longitude!
+        )
+        
+        annotation.title = "\(DataModel.studentInformation!.firstName ?? "") \(DataModel.studentInformation!.lastName ?? "")"
+        annotation.subtitle = DataModel.studentInformation!.mediaURL
+        
+        self.mapView.addAnnotation(annotation)
+        
+    }
+    func handlePostLocation(success: Bool, error: Error?) {
+        if success {
+            print("SUCCESS")
+            
+            self.presentingViewController?.dismiss(
+                animated: true, completion: nil
+            )
+
+        } else {
+            if let error = error {
+                print("ERROR \(error)")
+            } else {
+                print("ERROR UNKNOWN")
+            }
+            
         }
+        
+    }
+    
+    @IBAction func didTapFinishButton(_ sender: Any) {
+        
+        ParseClient.postStudentLocation(
+            location: DataModel.studentInformation!,
+            completion: handlePostLocation(success:error:)
+        )
         
     }
 }

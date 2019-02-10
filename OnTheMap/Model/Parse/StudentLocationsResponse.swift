@@ -10,25 +10,25 @@ import Foundation
 
 struct StudentLocationsResult: Codable {
     
-    let results: [StudentInformation]
+    let results: [StudentLocation]
     
     enum CodingKeys: String, CodingKey {
         case results
     }
 }
 
-struct StudentInformation: Codable {
+struct StudentLocation: Codable {
     
-    let createdAt: String
-    let firstName: String?
-    let lastName: String?
-    let latitude: Double?
-    let longitude: Double?
-    let mapString: String?
-    let mediaURL: String?
-    let objectId: String
-    let uniqueKey: String?
-    let updatedAt: String
+    var createdAt: String?
+    var firstName: String?
+    var lastName: String?
+    var latitude: Double?
+    var longitude: Double?
+    var mapString: String?
+    var mediaURL: String?
+    var objectId: String?
+    var uniqueKey: String?
+    var updatedAt: String?
     
     enum CodingKeys: String, CodingKey {
         case createdAt
@@ -41,5 +41,15 @@ struct StudentInformation: Codable {
         case objectId
         case uniqueKey
         case updatedAt
+    }    
+}
+
+struct PostLocationResult: Codable {
+    let createdAt: String
+    let objectId: String
+    
+    enum CodingKeys: String, CodingKey {
+        case createdAt
+        case objectId
     }
 }
