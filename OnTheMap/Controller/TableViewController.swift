@@ -74,32 +74,25 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentInformationTableViewCell")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentLocationTableViewCell")!
         
         let studentInformation = DataModel.studentInformationList[indexPath.row]
         
         cell.textLabel?.text = "\(studentInformation.firstName ?? "") \(studentInformation.lastName ?? "")"
         cell.imageView?.image = UIImage(named: "icon_pin")
         
-//        if let posterPath = movie.posterPath {
-//            TMDBClient.downloadPosterImage(posterPath: posterPath) { (data, error) in
-//                guard let data = data else {
-//                    return
-//                }
-//
-//                let image = UIImage(data: data)
-//                cell.imageView?.image = image
-//                cell.setNeedsLayout()
-//            }
-//        }
+        // If the cell has a detail label, we will put the evil scheme in.
+        if let detailTextLabel = cell.detailTextLabel {
+            detailTextLabel.text = studentInformation.mediaURL
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        
         print("row \(indexPath.row) was tapped")
+        
         if let mediaURL = DataModel.studentInformationList[indexPath.row].mediaURL, let url = URL(string: mediaURL) {
             UIApplication.shared.open(url)
         }
