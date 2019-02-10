@@ -54,12 +54,7 @@ class InformationPostingViewController: UIViewController {
         activityIndicator.stopAnimating()
         
         guard let placeMark = placeMark else {
-            print("COULD NOT RESOLVE LOCATION!")
-            let alertController = UIAlertController(title: "Error", message: "Could not resolve location!", preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            
-            self.present(alertController, animated: true, completion: nil)
-            
+            alertUser(title: "Error", message: "Could not resolve location!")
             return
         }
         
@@ -124,11 +119,7 @@ class InformationPostingViewController: UIViewController {
             
             if errorMessage != "" {
                 activityIndicator.stopAnimating()
-                
-                let alertVC = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
-                alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                self.present(alertVC, animated: true, completion: nil)
-                
+                alertUser(title: "Error", message: errorMessage)
             } else {
                 let geocoder = CLGeocoder()
                 geocoder.geocodeAddressString(
@@ -137,6 +128,13 @@ class InformationPostingViewController: UIViewController {
                 )
             }
         }
+    }
+    
+    func alertUser(title: String, message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        
+        self.present(alertVC, animated: true, completion: nil)
     }
 }
 

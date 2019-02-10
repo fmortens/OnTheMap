@@ -56,10 +56,10 @@ class LoginViewController: UIViewController {
                 errorMessage = error.rawValue
             }
             
-            let alertController = UIAlertController(title: "Login Failed", message: errorMessage, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            
-            self.present(alertController, animated: true, completion: nil)
+            alertUser(
+                title: "Login Failed",
+                message: errorMessage
+            )
         }
     }
 
@@ -74,9 +74,10 @@ class LoginViewController: UIViewController {
                 errorMessage = error.rawValue
             }
             
-            let alertController = UIAlertController(title: "Data fetch failed", message: errorMessage, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
+            alertUser(
+                title: "Data fetch failed",
+                message: errorMessage
+            )
         }
         
     }
@@ -87,18 +88,25 @@ class LoginViewController: UIViewController {
         if success {
             self.performSegue(withIdentifier: "successfulLogin", sender: nil)
         } else {
-            let alertVC = UIAlertController(
+            alertUser(
                 title: "Login Failed",
-                message: "Network error occurred, please try again.",
-                preferredStyle: .alert
+                message: "Network error occurred, please try again."
             )
-            
-            alertVC.addAction(
-                UIAlertAction(title: "OK", style: .default, handler: nil)
-            )
-            
-            show(alertVC, sender: nil)
         }
+    }
+    
+    func alertUser(title: String, message: String) {
+        let alertVC = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        alertVC.addAction(
+            UIAlertAction(title: "OK", style: .default, handler: nil)
+        )
+        
+        show(alertVC, sender: nil)
     }
     
     // Handle keyboard

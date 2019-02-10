@@ -55,41 +55,37 @@ class AddLocationMapViewController: CustomViewController {
             )
         } else {
             if let error = error {
-                let alertController = UIAlertController(
+                alertUser(
                     title: "Network failure",
-                    message: "Could not send location, please try again.",
-                    preferredStyle: .alert
+                    message: "Could not send location, please try again."
                 )
-                
-                alertController.addAction(
-                    UIAlertAction(
-                        title: "OK",
-                        style: .default,
-                        handler: nil
-                    )
-                )
-                
-                self.present(alertController, animated: true, completion: nil)
             } else {
-                let alertController = UIAlertController(
+                alertUser(
                     title: "Network failure",
-                    message: "Unknown error occurred, please try again.",
-                    preferredStyle: .alert
+                    message: "Unknown error occurred, please try again."
                 )
-                
-                alertController.addAction(
-                    UIAlertAction(
-                        title: "OK",
-                        style: .default,
-                        handler: nil
-                    )
-                )
-                
-                self.present(alertController, animated: true, completion: nil)
             }
             
         }
         
+    }
+    
+    func alertUser(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: nil
+            )
+        )
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func didTapFinishButton(_ sender: Any) {

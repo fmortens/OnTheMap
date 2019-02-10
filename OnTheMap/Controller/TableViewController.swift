@@ -37,7 +37,7 @@ class TableViewController: CustomViewController {
             tableView.addSubview(refreshControl)
         }
         
-        requestData()
+        // We should not need to load data yet since login loaded it for us. User can request new though.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,22 +61,28 @@ class TableViewController: CustomViewController {
             
             self.tableView.reloadData()
         } else {
-            let alertController = UIAlertController(
+            alertUser(
                 title: "Network failure",
-                message: "Could not fetch location data. Please try again.",
-                preferredStyle: .alert
-            )
-            
-            alertController.addAction(
-                UIAlertAction(
-                    title: "OK",
-                    style: .default,
-                    handler: nil
-                )
-            )
-            
-            self.present(alertController, animated: true, completion: nil)
+                message: "Could not fetch location data. Please try again."
+             )
         }
+    }
+    
+    func alertUser(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
         
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: nil
+            )
+        )
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 }

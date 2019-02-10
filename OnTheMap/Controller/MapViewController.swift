@@ -59,6 +59,24 @@ class MapViewController: CustomViewController {
         self.mapView.addAnnotations(annotations)
     }
     
+    func alertUser(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+        
+        alertController.addAction(
+            UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: nil
+            )
+        )
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     @objc
     override func requestData() {
         activityIndicator.startAnimating()
@@ -71,21 +89,10 @@ class MapViewController: CustomViewController {
         if success {
             updatePins()
         } else {
-            let alertController = UIAlertController(
+            alertUser(
                 title: "Network failure",
-                message: "Could not fetch location data. Please try again.",
-                preferredStyle: .alert
+                message: "Could not fetch location data. Please try again."
             )
-            
-            alertController.addAction(
-                UIAlertAction(
-                    title: "OK",
-                    style: .default,
-                    handler: nil
-                )
-            )
-            
-            self.present(alertController, animated: true, completion: nil)
         }
     }
     
