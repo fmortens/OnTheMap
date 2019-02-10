@@ -19,11 +19,11 @@ class CustomViewController: UIViewController {
     
     @objc
     func requestData() {
-        print("Please override")
+        // please override
     }
     
     func handleStudentLocationsResult(success: Bool, error: Error?) {
-        print("Please override")
+        // please override
     }
     
 }

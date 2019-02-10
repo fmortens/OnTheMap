@@ -88,7 +88,7 @@ class LoginViewController: UIViewController {
         if success {
             self.performSegue(withIdentifier: "successfulLogin", sender: nil)
         } else {
-            let alertVC = UIAlertController(title: "Login Failed", message: (error as! String), preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Login Failed", message: "Network error occurred, please try again.", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             show(alertVC, sender: nil)
         }
@@ -136,13 +136,5 @@ class LoginViewController: UIViewController {
         
         UIApplication.shared.open(UdacityClient.Endpoints.signup.url)
         
-    }
-}
-
-extension UIActivityIndicatorView {
-    func scale(factor: CGFloat) {
-        guard factor > 0.0 else { return }
-        
-        transform = CGAffineTransform(scaleX: factor, y: factor)
     }
 }

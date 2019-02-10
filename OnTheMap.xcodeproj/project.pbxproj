@@ -37,6 +37,8 @@
 		DEF637992210B51100C9F1B4 /* PutLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF637982210B51100C9F1B4 /* PutLocationResponse.swift */; };
 		DEF6379B2210B53600C9F1B4 /* PostLocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF6379A2210B53600C9F1B4 /* PostLocationResponse.swift */; };
 		DEF6379D2210B55400C9F1B4 /* StudentInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF6379C2210B55400C9F1B4 /* StudentInformation.swift */; };
+		DEF637AA2210DA7900C9F1B4 /* UIActivityIndicatorViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF637A92210DA7900C9F1B4 /* UIActivityIndicatorViewExtension.swift */; };
+		DEF637AE2210DAE400C9F1B4 /* TableViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF637AD2210DAE400C9F1B4 /* TableViewControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		DEF637982210B51100C9F1B4 /* PutLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutLocationResponse.swift; sourceTree = "<group>"; };
 		DEF6379A2210B53600C9F1B4 /* PostLocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationResponse.swift; sourceTree = "<group>"; };
 		DEF6379C2210B55400C9F1B4 /* StudentInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentInformation.swift; sourceTree = "<group>"; };
+		DEF637A92210DA7900C9F1B4 /* UIActivityIndicatorViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIActivityIndicatorViewExtension.swift; sourceTree = "<group>"; };
+		DEF637AD2210DAE400C9F1B4 /* TableViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				DE60B89A220CA8630081C21B /* CustomViewControllerExtension.swift */,
+				DEF637A92210DA7900C9F1B4 /* UIActivityIndicatorViewExtension.swift */,
+				DEF637AD2210DAE400C9F1B4 /* TableViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -291,6 +297,7 @@
 				DE580DF2220F09770013DB31 /* CustomViewController.swift in Sources */,
 				DEF6379D2210B55400C9F1B4 /* StudentInformation.swift in Sources */,
 				DE60B89B220CA8630081C21B /* CustomViewControllerExtension.swift in Sources */,
+				DEF637AA2210DA7900C9F1B4 /* UIActivityIndicatorViewExtension.swift in Sources */,
 				DEF637932210B4BF00C9F1B4 /* Guard.swift in Sources */,
 				DEF637952210B4D100C9F1B4 /* Permission.swift in Sources */,
 				DEF637972210B4E700C9F1B4 /* Ref.swift in Sources */,
@@ -301,6 +308,7 @@
 				DEF6379B2210B53600C9F1B4 /* PostLocationResponse.swift in Sources */,
 				DEF6378B2210B42A00C9F1B4 /* Errors.swift in Sources */,
 				DEC67E73220B4B6300FE1F28 /* LoginResponse.swift in Sources */,
+				DEF637AE2210DAE400C9F1B4 /* TableViewControllerExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
