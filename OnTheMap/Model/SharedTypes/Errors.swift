@@ -15,4 +15,5 @@ enum ErrorType: String {
     case PostError = "Could not send data"
     case PutError = "Could not update data"
     case Unknown = "An unknown error has occurred"
+    case LogoutError = "Could not log out. Please try again."
 }

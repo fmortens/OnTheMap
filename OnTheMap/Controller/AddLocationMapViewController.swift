@@ -45,8 +45,8 @@ class AddLocationMapViewController: CustomViewController {
             animated: true
         )
     }
+    
     func handlePostLocation(success: Bool, error: ErrorType?) {
-        
         activityIndicator.stopAnimating()
         
         if success {
@@ -65,9 +65,7 @@ class AddLocationMapViewController: CustomViewController {
                     message: ErrorType.Unknown.rawValue
                 )
             }
-            
         }
-        
     }
     
     @IBAction func didTapFinishButton(_ sender: Any) {

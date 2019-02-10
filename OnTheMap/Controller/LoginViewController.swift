@@ -97,29 +97,6 @@ class LoginViewController: CustomViewController {
         }
     }
     
-    // Handle keyboard
-    @objc func keyboardWillShow(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else {return}
-        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
-        
-        let keyboardFrame = keyboardSize.cgRectValue
-        
-        if self.view.frame.origin.y == 0 {
-            self.view.frame.origin.y -= keyboardFrame.height / 2
-        }
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        guard let userInfo = notification.userInfo else {return}
-        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
-        
-        let keyboardFrame = keyboardSize.cgRectValue
-        
-        if self.view.frame.origin.y != 0 {
-            self.view.frame.origin.y += keyboardFrame.height / 2
-        }
-    }
-    
     @IBAction func didTapLoginButton(_ sender: Any) {
         
         if let username = usernameTextField.text, let password = passwordTextField.text {

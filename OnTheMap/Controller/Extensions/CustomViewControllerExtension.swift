@@ -17,7 +17,7 @@ extension CustomViewController: MKMapViewDelegate {
         } else {
             alertUser(
                 title: "Logout Failed",
-                message: "Ok, for some weird reason we could not log out. Please try again :/"
+                message: ErrorType.LoginFailure.rawValue
             )
         }
     }
@@ -51,6 +51,24 @@ extension CustomViewController: MKMapViewDelegate {
             if let toOpen = view.annotation?.subtitle!, let url = URL(string: toOpen) {
                 UIApplication.shared.open(url)
             }
+        }
+    }
+    
+    // Handle keyboard
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let userInfo = notification.userInfo else {return}
+        guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
+        
+        let keyboardFrame = keyboardSize.cgRectValue
+        
+        if self.view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= keyboardFrame.height / 2
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
         }
     }
     
