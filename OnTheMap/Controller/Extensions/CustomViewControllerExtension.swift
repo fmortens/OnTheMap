@@ -15,22 +15,10 @@ extension CustomViewController: MKMapViewDelegate {
         if success {
             self.dismiss(animated: true, completion: nil)
         } else {
-            
-            let alertController = UIAlertController(
+            alertUser(
                 title: "Logout Failed",
-                message: "Ok, for some weird reason we could not log out. Please try again :/",
-                preferredStyle: .alert
+                message: "Ok, for some weird reason we could not log out. Please try again :/"
             )
-            
-            alertController.addAction(
-                UIAlertAction(
-                    title: "OK",
-                    style: .default,
-                    handler: nil
-                )
-            )
-            
-            self.present(alertController, animated: true, completion: nil)
         }
     }
     

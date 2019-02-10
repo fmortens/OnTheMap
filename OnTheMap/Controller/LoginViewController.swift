@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: CustomViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -82,7 +82,7 @@ class LoginViewController: UIViewController {
         
     }
     
-    func handleStudentLocationsResult(success: Bool, error: Error?) {
+    override func handleStudentLocationsResult(success: Bool, error: Error?) {
         activityIndicator.stopAnimating()
         
         if success {
@@ -93,20 +93,6 @@ class LoginViewController: UIViewController {
                 message: "Network error occurred, please try again."
             )
         }
-    }
-    
-    func alertUser(title: String, message: String) {
-        let alertVC = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        
-        alertVC.addAction(
-            UIAlertAction(title: "OK", style: .default, handler: nil)
-        )
-        
-        show(alertVC, sender: nil)
     }
     
     // Handle keyboard
