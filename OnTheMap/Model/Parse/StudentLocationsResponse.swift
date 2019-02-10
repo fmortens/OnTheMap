@@ -10,14 +10,14 @@ import Foundation
 
 struct StudentLocationsResult: Codable {
     
-    let results: [StudentLocation]
+    let results: [StudentInformation]
     
     enum CodingKeys: String, CodingKey {
         case results
     }
 }
 
-struct StudentLocation: Codable {
+struct StudentInformation: Codable {
     
     var createdAt: String?
     var firstName: String?
@@ -41,15 +41,34 @@ struct StudentLocation: Codable {
         case objectId
         case uniqueKey
         case updatedAt
-    }    
+    }
+    
+    init(firstName: String, lastName: String, latitude: Double, longitude: Double, mapString: String, mediaURL: String, uniqueKey: String, objectId: String?) {
+        self.firstName = firstName
+        self.lastName = lastName
+        self.latitude = latitude
+        self.longitude = longitude
+        self.mapString = mapString
+        self.mediaURL = mediaURL
+        self.uniqueKey = uniqueKey
+        self.objectId = objectId
+    }
 }
 
-struct PostLocationResult: Codable {
+struct PostLocationResponse: Codable {
     let createdAt: String
     let objectId: String
     
     enum CodingKeys: String, CodingKey {
         case createdAt
         case objectId
+    }
+}
+
+struct PutLocationResponse: Codable {
+    let updatedAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case updatedAt
     }
 }

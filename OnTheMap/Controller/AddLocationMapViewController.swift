@@ -32,10 +32,22 @@ class AddLocationMapViewController: UIViewController {
         
         self.mapView.addAnnotation(annotation)
         
+        let region = MKCoordinateRegion(
+            center: annotation.coordinate,
+            latitudinalMeters: CLLocationDistance(exactly: 5000)!,
+            longitudinalMeters: CLLocationDistance(exactly: 5000)!
+        )
+        
+        mapView.setRegion(
+            mapView.regionThatFits(region),
+            animated: true
+        )
     }
     func handlePostLocation(success: Bool, error: Error?) {
         if success {
             print("SUCCESS")
+            
+            print("\(String(describing: DataModel.studentInformation))")
             
             self.presentingViewController?.dismiss(
                 animated: true, completion: nil
@@ -54,10 +66,17 @@ class AddLocationMapViewController: UIViewController {
     
     @IBAction func didTapFinishButton(_ sender: Any) {
         
-        ParseClient.postStudentLocation(
-            location: DataModel.studentInformation!,
-            completion: handlePostLocation(success:error:)
-        )
+        if (DataModel.studentInformation?.objectId) != nil {
+            ParseClient.putStudentLocation(
+                location: DataModel.studentInformation!,
+                completion: handlePostLocation(success:error:)
+            )
+        } else {
+            ParseClient.postStudentLocation(
+                location: DataModel.studentInformation!,
+                completion: handlePostLocation(success:error:)
+            )
+        }
         
     }
 }

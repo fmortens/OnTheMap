@@ -25,7 +25,13 @@ class InformationPostingViewController: UIViewController {
         self.locationTextInput.delegate = textFieldDelegate
         self.linkTextInput.delegate = textFieldDelegate
         
+        if (DataModel.studentInformation?.objectId != nil) {
+            self.locationTextInput.text = DataModel.studentInformation?.mapString
+            self.linkTextInput.text = DataModel.studentInformation?.mediaURL
+        }
+        
         print("addLocationViewController")
+        
     }
     
     func handleGeocodeAddress(placeMark: [CLPlacemark]?, error: Error?) {
@@ -39,19 +45,28 @@ class InformationPostingViewController: UIViewController {
             return
         }
         
-        // Store the data into DataModel
-        DataModel.studentInformation = StudentLocation(
-            createdAt: nil,
-            firstName: DataModel.publicUserData!.firstName,
-            lastName: DataModel.publicUserData!.lastName,
-            latitude: placeMark[0].location!.coordinate.latitude,
-            longitude: placeMark[0].location!.coordinate.longitude,
-            mapString: self.locationTextInput.text!,
-            mediaURL: self.linkTextInput.text!,
-            objectId: nil,
-            uniqueKey: UdacityClient.Auth.account!.key,
-            updatedAt: nil
-        )
+        if let mapString = self.locationTextInput.text, let mediaUrl = self.linkTextInput.text {
+            
+             print("BEFORE: \(String(describing: DataModel.studentInformation))")
+            
+            // Preserve objectId to be able to update rather than post new
+            let objectId = DataModel.studentInformation?.objectId
+            
+            // Store the data into DataModel
+            DataModel.studentInformation = StudentInformation(
+                firstName: DataModel.publicUserData!.firstName!,
+                lastName: DataModel.publicUserData!.lastName!,
+                latitude: placeMark[0].location!.coordinate.latitude,
+                longitude: placeMark[0].location!.coordinate.longitude,
+                mapString: mapString,
+                mediaURL: mediaUrl,
+                uniqueKey: UdacityClient.Auth.account!.key,
+                objectId: objectId
+            )
+            
+            print("AFTER: \(String(describing: DataModel.studentInformation))")
+            
+        }
         
         self.performSegue(withIdentifier: "addLocationMap", sender: nil)
         
@@ -61,7 +76,6 @@ class InformationPostingViewController: UIViewController {
         
         // Delete data
         DataModel.studentInformation = nil
-        
         self.dismiss(animated: true, completion: nil)
         
     }
