@@ -8,16 +8,22 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 class InformationPostingViewController: UIViewController {
     
     @IBOutlet weak var locationTextInput: UITextField!
     @IBOutlet weak var linkTextInput: UITextField!
     
+    var activeField: UITextField?
+    let textFieldDelegate = TextFieldDelegate()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view, typically from a nib.
+        self.locationTextInput.delegate = textFieldDelegate
+        self.linkTextInput.delegate = textFieldDelegate
         
         print("addLocationViewController")
     }
@@ -32,7 +38,29 @@ class InformationPostingViewController: UIViewController {
             return
         }
         
-        print("\(String(describing: placeMark))")
+        
+        
+//        self.performSegue(withIdentifier: "addLocationMap", sender: nil)
+        
+        
+        // Get the storyboard and ResultViewController
+        let addLocationMapViewController = self.storyboard!.instantiateViewController(
+            withIdentifier: "AddLocationMapViewController"
+            ) as! AddLocationMapViewController
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placeMark[0].location!.coordinate
+        annotation.title = "\(DataModel.publicUserData?.firstName ?? "") \(DataModel.publicUserData?.lastName ?? "")"
+        annotation.subtitle = linkTextInput.text!
+        
+        addLocationMapViewController.annotation = annotation
+        
+        
+        self.navigationController!.pushViewController(
+            addLocationMapViewController,
+            animated: true
+        )
+        
     }
     
     @IBAction func didTapCancelButton(_ sender: Any) {
@@ -65,5 +93,13 @@ class InformationPostingViewController: UIViewController {
                 geocoder.geocodeAddressString(addressString, completionHandler: handleGeocodeAddress(placeMark:error:))
             }
         }
+    }
+}
+
+class TextFieldDelegate : NSObject, UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
     }
 }

@@ -24,7 +24,7 @@ class ParseClient {
             
             switch self {
                 case .getStudentLocations:
-                    return Endpoints.base + "?limit=100&order=updatedAt"
+                    return Endpoints.base + "?limit=100&order=-updatedAt"
             }
         }
         

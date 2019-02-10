@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DE464F71220F5DFE0093641C /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE464F70220F5DFE0093641C /* InformationPostingViewController.swift */; };
+		DE491DE4220F8C6C00528443 /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE491DE3220F8C6C00528443 /* AddLocationMapViewController.swift */; };
 		DE580DF2220F09770013DB31 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE580DF1220F09770013DB31 /* CustomViewController.swift */; };
 		DE60B897220CA6F30081C21B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B896220CA6F30081C21B /* MapViewController.swift */; };
 		DE60B899220CA7370081C21B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE60B898220CA7370081C21B /* TableViewController.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		DE464F70220F5DFE0093641C /* InformationPostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
+		DE491DE3220F8C6C00528443 /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
 		DE580DF1220F09770013DB31 /* CustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		DE60B896220CA6F30081C21B /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		DE60B898220CA7370081C21B /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				DE60B89A220CA8630081C21B /* CustomViewControllerExtension.swift */,
 				DE580DF1220F09770013DB31 /* CustomViewController.swift */,
 				DE464F70220F5DFE0093641C /* InformationPostingViewController.swift */,
+				DE491DE3220F8C6C00528443 /* AddLocationMapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				DE60B897220CA6F30081C21B /* MapViewController.swift in Sources */,
 				DEC67E58220B478300FE1F28 /* AppDelegate.swift in Sources */,
 				DE60B8A2220CB8FD0081C21B /* DataModel.swift in Sources */,
+				DE491DE4220F8C6C00528443 /* AddLocationMapViewController.swift in Sources */,
 				DE580DF2220F09770013DB31 /* CustomViewController.swift in Sources */,
 				DE60B89B220CA8630081C21B /* CustomViewControllerExtension.swift in Sources */,
 				DEC67E6E220B483000FE1F28 /* UdacityClient.swift in Sources */,
